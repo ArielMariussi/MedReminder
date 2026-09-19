@@ -12,7 +12,7 @@ public class MarkMedicineAsTakenEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
   => app.MapPost("/taken/{id:long}", HandleAsync)
       .WithName("Medicines: Mark As Taken")
-      .WithSummary("Marca medicamento como tomado")
+      .WithSummary("Marks a medicine as taken")
       .WithOrder(5)
       .Produces<Response<Medicine>>();
 

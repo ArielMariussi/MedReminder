@@ -3,15 +3,15 @@
 @inject IJSRuntime JS
 <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h4" Class="mb-4">Meus Medicamentos</MudText>
+<MudText Typo="Typo.h4" Class="mb-4">My Medicines</MudText>
 <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="/medicines/create"
            StartIcon="@Icons.Material.Filled.Add" Class="mb-6">
-    Novo Medicamento
+    New Medicine
 </MudButton>
 
 @if (!Medicines.Any())
 {
-    <MudAlert Severity="Severity.Info">Nenhum medicamento cadastrado.</MudAlert>
+    <MudAlert Severity="Severity.Info">No medicines registered.</MudAlert>
 }
 else
 {
@@ -27,21 +27,21 @@ else
                             {
                                 <MudChip T="string" Color="Color.Success" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Check">
-                                    Tomado
+                                    Taken
                                 </MudChip>
                             }
                             else if (IsPastDue(med.Time))
                             {
                                 <MudChip T="string" Color="Color.Error" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Warning">
-                                    Atrasado
+                                    Overdue
                                 </MudChip>
                             }
                             else
                             {
                                 <MudChip T="string" Color="Color.Warning" Size="Size.Small"
                                          Icon="@Icons.Material.Filled.Schedule">
-                                    Pendente
+                                    Pending
                                 </MudChip>
                             }
                         </div>
@@ -60,7 +60,7 @@ else
                                        StartIcon="@Icons.Material.Filled.DoneAll"
                                        OnClick="() => MarkAsTaken(med.Id)"
                                        FullWidth="true">
-                                Marcar como Tomado
+                                Mark as Taken
                             </MudButton>
                         }
                     </MudCardActions>

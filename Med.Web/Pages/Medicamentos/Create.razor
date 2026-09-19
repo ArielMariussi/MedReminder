@@ -2,17 +2,17 @@
 @inherits CreatePage
 
 
-<MudText Typo="Typo.h5">Novo Medicamento</MudText>
+<MudText Typo="Typo.h5">New Medicine</MudText>
 
 <EditForm Model="this" OnValidSubmit="HandleCreate">
     <DataAnnotationsValidator/>
 
-    <MudTextField Label="Nome" @bind-Value="Name" Required="true" />
+    <MudTextField Label="Name" @bind-Value="Name" Required="true" />
 
-    <MudTimePicker Label="Horário" @bind-Time="Time" />
+    <MudTimePicker Label="Time" @bind-Time="Time" />
 
     <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">
-        Salvar
+        Save
     </MudButton>
 
 

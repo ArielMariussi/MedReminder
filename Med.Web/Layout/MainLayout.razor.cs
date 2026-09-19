@@ -39,7 +39,7 @@ public partial class MainLayout : LayoutComponentBase, IAsyncDisposable
         if (_notificationPermission == "denied")
         {
             Snackbar.Add(
-                "As notificações foram bloqueadas para este site. Habilite manualmente nas configurações do navegador (ícone de cadeado na barra de endereço).",
+                "Notifications have been blocked for this site. Enable them manually in your browser settings (padlock icon in the address bar).",
                 Severity.Warning);
             return;
         }
@@ -48,7 +48,7 @@ public partial class MainLayout : LayoutComponentBase, IAsyncDisposable
         _notificationPermission = await JS.InvokeAsync<string>("getNotificationPermission");
 
         if (_notificationPermission == "granted")
-            Snackbar.Add("Notificações ativadas!", Severity.Success);
+            Snackbar.Add("Notifications enabled!", Severity.Success);
     }
 
     private void StartNotificationTimer()

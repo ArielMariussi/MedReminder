@@ -14,10 +14,10 @@ public class MedicineHandler(IHttpClientFactory httpClientFactory) : IMedicineHa
         var result = await _client.PostAsJsonAsync("v1/medicines", request);
 
         if (!result.IsSuccessStatusCode)
-            return Response<Medicine>.Fail("Nao foi possivel cadastrar o medicamento");
+            return Response<Medicine>.Fail("Unable to create medicine");
 
         return await result.Content.ReadFromJsonAsync<Response<Medicine>>()
-            ?? Response<Medicine>.Fail("Erro inesperado");
+            ?? Response<Medicine>.Fail("Unexpected error");
 
     }
 
@@ -26,17 +26,17 @@ public class MedicineHandler(IHttpClientFactory httpClientFactory) : IMedicineHa
         var result = await _client.DeleteAsync($"v1/medicines/{request.Id}");
 
         if (!result.IsSuccessStatusCode)
-            return Response<bool>.Fail("Erro ao deletar medicamento");
+            return Response<bool>.Fail("Error deleting medicine");
 
         return await result.Content.ReadFromJsonAsync<Response<bool>>()
-            ?? Response<bool>.Fail("Erro inesperado");
+            ?? Response<bool>.Fail("Unexpected error");
 
     }
 
     public async Task<Response<Medicine?>> GetByIdAsync(GetMedicineByIdRequest request)
     {
         return await _client.GetFromJsonAsync<Response<Medicine?>>($"v1/medicines/{request.Id}")
-             ?? Response<Medicine?>.Fail("Medicamento nao encontrado");
+             ?? Response<Medicine?>.Fail("Medicine not found");
     }
 
     public async  Task<Response<IEnumerable<Medicine>>> GetByUserAsync(GetMedicinesByUserRequest request)
@@ -45,13 +45,13 @@ public class MedicineHandler(IHttpClientFactory httpClientFactory) : IMedicineHa
         {
             var response = await _client.GetAsync("v1/medicines/user");
             if (!response.IsSuccessStatusCode)
-                return Response<IEnumerable<Medicine>>.Fail("Não autorizado");
+                return Response<IEnumerable<Medicine>>.Fail("Unauthorized");
             return await response.Content.ReadFromJsonAsync<Response<IEnumerable<Medicine>>>()
-                   ?? Response<IEnumerable<Medicine>>.Fail("Erro ao carregar");
+                   ?? Response<IEnumerable<Medicine>>.Fail("Error loading");
         }
         catch
         {
-            return Response<IEnumerable<Medicine>>.Fail("Erro ao carregar medicamentos");
+            return Response<IEnumerable<Medicine>>.Fail("Error loading medicines");
         }
     }
 
@@ -60,15 +60,15 @@ public class MedicineHandler(IHttpClientFactory httpClientFactory) : IMedicineHa
         var result = await _client.PostAsJsonAsync($"v1/medicines/taken/{request.Id}", request);
 
         if (!result.IsSuccessStatusCode)
-            return Response<Medicine>.Fail("Erro ao marcar medicamento como tomado");
+            return Response<Medicine>.Fail("Error marking medicine as taken");
 
         return await result.Content.ReadFromJsonAsync<Response<Medicine>>()
-            ?? Response<Medicine>.Fail("Erro inesperado");
+            ?? Response<Medicine>.Fail("Unexpected error");
     }
 
     public async Task<Response<IEnumerable<Medicine>>> SearchByNameAsync(SearchMedicineByNameRequest request)
     {
         return await _client.GetFromJsonAsync<Response<IEnumerable<Medicine>>>($"v1/medicines/search?name={request.Name}")
-            ?? Response<IEnumerable<Medicine>>.Fail("Erro na busca");
+            ?? Response<IEnumerable<Medicine>>.Fail("Error searching");
     }
 }

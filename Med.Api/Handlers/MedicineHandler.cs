@@ -13,7 +13,7 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
     public async Task<Response<Medicine>> CreateAsync(CreateMedicineRequest request)
     {
         if (string.IsNullOrWhiteSpace(request.Name))
-            return Response<Medicine>.Fail("Nome do medicamento é obrigatório");
+            return Response<Medicine>.Fail("Medicine name is required");
 
         var medicine = new Medicine
         {
@@ -38,7 +38,7 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
                 m.UserId == request.UserId);
 
         if (medicine == null)
-            return Response<Medicine?>.Fail("Medicamento nao encontrado");
+            return Response<Medicine?>.Fail("Medicine not found");
 
         return Response<Medicine?>.Ok(medicine);
     }
@@ -60,7 +60,7 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
     {
         if (string.IsNullOrWhiteSpace(request.Name))
             return Response<IEnumerable<Medicine>>
-                .Fail("Termo de busca inválido");
+                .Fail("Invalid search term");
 
         var medicines = await _context.Medicines
             .AsNoTracking()
@@ -71,7 +71,7 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
             .ToListAsync();
 
         if (medicines is null || !medicines.Any())
-            return Response<IEnumerable<Medicine>>.Fail("Nenhum medicamento encontrado");
+            return Response<IEnumerable<Medicine>>.Fail("No medicines found");
 
 
         return Response<IEnumerable<Medicine>>.Ok(medicines);
@@ -85,10 +85,10 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
                 m.UserId == request.UserId);
 
         if (medicine is null)
-            return Response<Medicine>.Fail("Medicamento não encontrado");
+            return Response<Medicine>.Fail("Medicine not found");
 
         if (medicine.Taken)
-            return Response<Medicine>.Fail("Medicamento já foi marcado como tomado");
+            return Response<Medicine>.Fail("Medicine has already been marked as taken");
 
         var history = new MedicineHistory
         {
@@ -112,7 +112,7 @@ public sealed class MedicineHandler(AppDbContext _context) : IMedicineHandler
                 m.UserId == request.UserId);
 
         if (medicine is null)
-            return Response<bool>.Fail("Medicamento não encontrado");
+            return Response<bool>.Fail("Medicine not found");
 
         _context.Medicines.Remove(medicine);
         await _context.SaveChangesAsync();

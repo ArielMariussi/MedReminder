@@ -13,9 +13,9 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
     {
         var result = await _client.PostAsJsonAsync("v1/identity/login?useCookies=true", request);
         if (!result.IsSuccessStatusCode)
-            return Response<string>.Fail("Usuario ou senha invalidos");
+            return Response<string>.Fail("Invalid username or password");
 
-        return Response<string>.Ok("Login realizado com sucesso");
+        return Response<string>.Ok("Login successful");
     }
 
     public async Task LogoutAsync()
@@ -30,8 +30,8 @@ public class AccountHandler(IHttpClientFactory httpClientFactory) : IAccountHand
 
         var result = await _client.PostAsJsonAsync("v1/identity/register", request);
         if (!result.IsSuccessStatusCode)
-            return Response<string>.Fail("Usuario ou senha invalidos");
+            return Response<string>.Fail("Invalid username or password");
 
-        return Response<string>.Ok("Cadastro realizado com sucesso");
+        return Response<string>.Ok("Registration successful");
     }
 }

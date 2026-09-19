@@ -13,7 +13,7 @@ public class SearchMedicineByNameEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
         => app.MapGet("/search", HandleAsync)
             .WithName("Medicines: Search By Name")
-            .WithSummary("Busca medicamentos pelo nome")
+            .WithSummary("Searches medicines by name")
             .WithOrder(4)
             .Produces<Response<IEnumerable<Medicine>>>();
 

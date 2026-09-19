@@ -3,8 +3,8 @@ obj/
 publish/
 .vs/
 
-# Saida de publish do frontend. O deploy do Vercel vem do GitHub Actions
-# (.github/workflows/deploy.yml), que compila a partir do codigo-fonte.
+# Frontend publish output. The Vercel deploy comes from GitHub Actions
+# (.github/workflows/deploy.yml), which builds from source.
 Med.Web/release/
 *.user
 *.suo

@@ -46,18 +46,18 @@
 
             if (Notification.permission === "granted") {
                 const options = {
-                    body: `Está na hora de tomar: ${name} (${time})`,
+                    body: `It's time to take: ${name} (${time})`,
                     icon: "/favicon.png"
                 };
                 try {
                     if (navigator.serviceWorker) {
                         const registration = await navigator.serviceWorker.ready;
-                        await registration.showNotification("💊 Hora do remédio!", options);
+                        await registration.showNotification("💊 Time for your medicine!", options);
                     } else {
-                        new Notification("💊 Hora do remédio!", options);
+                        new Notification("💊 Time for your medicine!", options);
                     }
                 } catch (err) {
-                    console.error("Falha ao exibir notificação:", err);
+                    console.error("Failed to show notification:", err);
                 }
             }
 

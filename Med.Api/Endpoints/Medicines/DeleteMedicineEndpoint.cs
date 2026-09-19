@@ -11,7 +11,7 @@ namespace Med.Api.Endpoints.Medicines
         public static void Map(IEndpointRouteBuilder app)
          => app.MapDelete("/{id:long}", HandleAsync)
             .WithName("Medicines: Delete")
-            .WithSummary("Remove um medicamento")
+            .WithSummary("Removes a medicine")
             .WithOrder(6)
             .Produces<Response<bool>>();
 

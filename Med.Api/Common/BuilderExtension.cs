@@ -61,8 +61,8 @@ public static class BuilderExtension
                 options.Password.RequiredLength = 1;
                 options.Password.RequiredUniqueChars = 0;
 
-                // Vazio desliga a checagem de caracteres do UserValidator, entao
-                // qualquer e-mail e aceito como nome de usuario.
+                // Empty disables the UserValidator character check, so
+                // any e-mail is accepted as the username.
                 options.User.AllowedUserNameCharacters = string.Empty;
                 options.User.RequireUniqueEmail = false;
             })

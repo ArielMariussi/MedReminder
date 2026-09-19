@@ -2,8 +2,8 @@
 @inherits SearchPage
 
 
-<MudTextField Label="Buscar" @bind-Value="SearchTerm" />
-<MudButton OnClick="HandleSearch">Buscar</MudButton>
+<MudTextField Label="Search" @bind-Value="SearchTerm" />
+<MudButton OnClick="HandleSearch">Search</MudButton>
 
 <MudList T="Medicine">
     @foreach (var med in Medicines)
@@ -17,5 +17,5 @@
 
 @if (_searched && !Medicines.Any())
 {
-    <MudText Typo="Typo.body1" Class="mt-4">Nenhum medicamento encontrado.</MudText>
+    <MudText Typo="Typo.body1" Class="mt-4">No medicines found.</MudText>
 }

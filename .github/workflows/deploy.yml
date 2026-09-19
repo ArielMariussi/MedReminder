@@ -1,69 +1,69 @@
-name: CI/CD - Med Lembrete de Remedios
- 
+name: CI/CD - Med Reminder
+
 on:
   push:
     branches:
       - main
- 
+
 jobs:
   build-and-deploy-api:
-    name: Build e Deploy API (Render)
+    name: Build and Deploy API (Render)
     runs-on: ubuntu-latest
- 
+
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v4
- 
-      - name: Instala .NET 9
+
+      - name: Install .NET 9
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
- 
-      - name: Restaura dependências
+
+      - name: Restore dependencies
         run: dotnet restore
- 
-      - name: Compila o projeto
+
+      - name: Build project
         run: dotnet build --configuration Release --no-restore
- 
-      - name: Publica a API
+
+      - name: Publish API
         run: dotnet publish Med.Api/Med.Api.csproj -c Release -o ./publish/api
- 
-      - name: Faz deploy no Render
+
+      - name: Deploy to Render
         run: |
           curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -H "Content-Type: application/json" \
           -d '{"clearCache": false}'
- 
+
   build-and-deploy-web:
-    name: Build e Deploy Frontend (Vercel)
+    name: Build and Deploy Frontend (Vercel)
     runs-on: ubuntu-latest
- 
+
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v4
- 
-      - name: Instala .NET 9
+
+      - name: Install .NET 9
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
- 
-      - name: Restaura dependências
+
+      - name: Restore dependencies
         run: dotnet restore
- 
-      - name: Limpa cache dotnet
+
+      - name: Clear dotnet cache
         run: dotnet nuget locals all --clear
 
-      - name: Publica o Frontend
+      - name: Publish Frontend
         run: dotnet publish Med.Web/Med.Web.csproj -c Release -o ./publish/web
- 
-      - name: Instala Vercel CLI
+
+      - name: Install Vercel CLI
         run: npm install -g vercel
- 
-      - name: Faz deploy no Vercel
+
+      - name: Deploy to Vercel
         env:
-          # Sem estes dois, a CLI nao sabe em qual projeto publicar e cria um
-          # novo a partir do nome da pasta (wwwroot), que ninguem acessa.
+          # Without these two, the CLI doesn't know which project to publish to and creates a
+          # new one from the folder name (wwwroot), which nobody accesses.
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
         run: vercel --prod --yes --token=${{ secrets.VERCEL_TOKEN }} ./publish/web/wwwroot

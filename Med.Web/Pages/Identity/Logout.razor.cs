@@ -27,15 +27,15 @@ public partial class LogoutPage : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        // Sem condicional: se o logout dependesse de uma checagem de auth que
-        // faz request, uma falha de rede pularia o logout e a sessao ficaria viva.
+        // No conditional: if logout depended on an auth check that makes a
+        // request, a network failure would skip the logout and the session would stay alive.
         try
         {
             await Handler.LogoutAsync();
         }
         catch
         {
-            // Mesmo se o servidor nao responder, seguimos para o reload abaixo.
+            // Even if the server doesn't respond, we proceed to the reload below.
         }
 
         await base.OnInitializedAsync();
@@ -45,11 +45,11 @@ public partial class LogoutPage : ComponentBase
 
     #region Methods
 
-    // Recarrega a aplicacao inteira em vez de chamar
-    // NotifyAuthenticationStateChanged. O notify faria o AuthorizeRouteView
-    // descartar e recriar esta pagina, reexecutando OnInitializedAsync; o
-    // reload zera tudo e o estado de autenticacao e refeito do zero, a partir
-    // do cookie que acabou de ser apagado.
+    // Reloads the whole application instead of calling
+    // NotifyAuthenticationStateChanged. The notify would make the AuthorizeRouteView
+    // discard and recreate this page, re-running OnInitializedAsync; the
+    // reload resets everything and the auth state is rebuilt from scratch,
+    // based on the cookie that was just deleted.
     public void GoToLogin()
         => NavigationManager.NavigateTo("/login", forceLoad: true);
 

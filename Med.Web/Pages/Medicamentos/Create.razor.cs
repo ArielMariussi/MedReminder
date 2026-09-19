@@ -21,7 +21,7 @@ public partial class CreatePage : ComponentBase
 
     public async Task HandleCreate()
     {
-        Console.WriteLine("CLICOU");
+        Console.WriteLine("CLICKED");
 
         try
         {
@@ -35,19 +35,19 @@ public partial class CreatePage : ComponentBase
 
             if (result.IsSuccess)
             {
-                Console.WriteLine("SUCESSO");
+                Console.WriteLine("SUCCESS");
                 Nav.NavigateTo("/medicines");
             }
             else
             {
-                Console.WriteLine($"ERRO: {result.Message}");
+                Console.WriteLine($"ERROR: {result.Message}");
             }
         }
         catch (Exception ex)
         {
             Console.WriteLine($"EXCEPTION: {ex.Message}");
         }
- 
+
     }
 }
 

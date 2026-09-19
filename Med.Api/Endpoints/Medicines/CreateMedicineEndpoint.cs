@@ -12,8 +12,8 @@ namespace Med.Api.Endpoints.Medicines
         public static void Map(IEndpointRouteBuilder app)
         => app.MapPost("/", HandleAsync)
             .WithName("Medicines: Create")
-            .WithSummary("Cria um novo medicamento")
-            .WithDescription("Cria um novo lembrete de medicamento")
+            .WithSummary("Creates a new medicine")
+            .WithDescription("Creates a new medicine reminder")
             .WithOrder(1)
             .Produces<Response<Medicine>>();
 

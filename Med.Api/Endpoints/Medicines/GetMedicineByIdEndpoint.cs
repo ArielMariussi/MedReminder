@@ -12,7 +12,7 @@ namespace Med.Api.Endpoints.Medicines
         public static void Map(IEndpointRouteBuilder app)
       => app.MapGet("/{id:long}", HandleAsync)
         .WithName("Medicines: Get By Id")
-        .WithSummary("Obtém um medicamento pelo ID")
+        .WithSummary("Gets a medicine by ID")
         .WithOrder(2)
         .Produces<Response<Medicine?>>();
 

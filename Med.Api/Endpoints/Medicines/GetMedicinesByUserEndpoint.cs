@@ -12,7 +12,7 @@ public class GetMedicinesByUserEndpoint : IEndpoint
     public static void Map(IEndpointRouteBuilder app)
  => app.MapGet("/user", HandleAsync)
             .WithName("Medicines: Get By User")
-            .WithSummary("Lista medicamentos do usuário")
+            .WithSummary("Lists the user's medicines")
             .WithOrder(3)
             .Produces<Response<IEnumerable<Medicine>>>();
 
