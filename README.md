@@ -17,6 +17,7 @@ Go to **https://med-lembrete-de-remedios.vercel.app** and you can:
 1. **Create an account** — sign up with an email and password to get your own isolated area
 2. **Register your medicines** — enter name, dosage, times, and treatment duration
 3. **Mark doses** — confirm each dose taken and track the history
+4. **Notification** -When the time arrives, a sound notification and a browser notification will be triggered 
 
 The API is hosted on Render's free plan. The first visit may take up to 30 seconds to load (cold start).
 
