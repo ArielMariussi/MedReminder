@@ -48,11 +48,11 @@ jobs:
         with:
           dotnet-version: '9.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore
-
       - name: Clear dotnet cache
         run: dotnet nuget locals all --clear
+
+      - name: Restore dependencies
+        run: dotnet restore
 
       - name: Publish Frontend
         run: dotnet publish Med.Web/Med.Web.csproj -c Release -o ./publish/web
